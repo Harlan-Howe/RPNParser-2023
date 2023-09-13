@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 
 display_font = cv2.FONT_HERSHEY_PLAIN
 
+
 class Node(ABC):
     """
     This class is the abstract class representing all nodes.
@@ -19,6 +20,7 @@ class Node(ABC):
         """
         :return: the value of this node and its children
         """
+        print("If you're seeing this, it's because you haven't overridden get_value() in one of the subclasses.")
         return -1
 
     @abstractmethod
@@ -26,6 +28,7 @@ class Node(ABC):
         """
         :return: a string description of this node and its children in infix notation.
         """
+        print("If you're seeing this, it's because you haven't overridden get_infix_string() in one of the subclasses.")
         return "Not yet written."
 
     def draw_self_at(self, buffer: np.ndarray, x: int, y: int, horizontal_spacing: int, vertical_spacing: int = 45):
@@ -38,32 +41,32 @@ class Node(ABC):
         :param vertical_spacing: the vertical spacing between this node and its children
         :return: None
         """
-        lower_left_point, lower_right_point = self.draw_my_label(buffer,x,y)
+        lower_left_point, lower_right_point = self.draw_my_label(buffer, x, y)
 
         if self.left is not None:
             cv2.line(img=buffer,
-                      pt1=lower_left_point,
-                      pt2=(int(x-horizontal_spacing/2), y+vertical_spacing),
-                      color=(1, 1, 0),
-                      thickness = 1)
+                     pt1=lower_left_point,
+                     pt2=(int(x-horizontal_spacing/2), y+vertical_spacing),
+                     color=(1, 1, 0),
+                     thickness=1)
             self.left.draw_self_at(buffer=buffer,
                                    x=int(x-horizontal_spacing/2),
                                    y=int(y+vertical_spacing),
-                                   horizontal_spacing=horizontal_spacing/2,
+                                   horizontal_spacing=int(horizontal_spacing/2),
                                    vertical_spacing=vertical_spacing)
         if self.right is not None:
             cv2.line(img=buffer,
-                      pt1=lower_right_point,
-                      pt2=(int(x+horizontal_spacing/2), y+vertical_spacing),
-                      color=(1, 1, 0),
-                      thickness = 1)
+                     pt1=lower_right_point,
+                     pt2=(int(x+horizontal_spacing/2), y+vertical_spacing),
+                     color=(1, 1, 0),
+                     thickness=1)
             self.right.draw_self_at(buffer=buffer,
-                                   x=int(x+horizontal_spacing/2),
-                                   y=y+vertical_spacing,
-                                   horizontal_spacing=horizontal_spacing/2,
-                                   vertical_spacing=vertical_spacing)
+                                    x=int(x+horizontal_spacing/2),
+                                    y=y+vertical_spacing,
+                                    horizontal_spacing=int(horizontal_spacing/2),
+                                    vertical_spacing=vertical_spacing)
 
-    def draw_my_label(self, buffer, x, y) -> Tuple[Tuple[int,int],Tuple[int,int]]:
+    def draw_my_label(self, buffer, x, y) -> Tuple[Tuple[int, int], Tuple[int, int]]:
         """
         draws just the content of this node into the center of the node, returning the coordinates of the lower corners
         of the node that can be used for drawing the lines to the next nodes.
@@ -74,7 +77,7 @@ class Node(ABC):
         this node.
         """
         descriptionString = f"{self.content}"
-        textSize, baseline = cv2.getTextSize(text = descriptionString,fontFace= display_font, fontScale= 1, thickness=1)
+        textSize, baseline = cv2.getTextSize(text=descriptionString, fontFace=display_font, fontScale=1, thickness=1)
 
         cv2.putText(img=buffer,
                     text=descriptionString,
@@ -86,8 +89,8 @@ class Node(ABC):
         cv2.line(img=buffer,
                  pt1=(int(x-textSize[0]/2-1), y),
                  pt2=(int(x+textSize[0]/2+1), y+textSize[1]+3),
-                 color = (0, 0, 1),
-                 thickness= 2)
+                 color=(0, 0, 1),
+                 thickness=2)
         cv2.line(img=buffer,
                  pt1=(int(x + textSize[0] / 2 - 1), y),
                  pt2=(int(x - textSize[0] / 2 + 1), y + textSize[1] + 3),
@@ -98,4 +101,3 @@ class Node(ABC):
         lower_right = (int(x+textSize[0]/2-1), y+textSize[1]+3)
 
         return lower_left, lower_right
-
