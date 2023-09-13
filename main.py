@@ -1,6 +1,12 @@
 import cv2
 import numpy as np
-import NodeFile
+from NodeFile import Node
+from AddNodeFile import AddNode
+from NumberNodeFile import NumberNode
+from OperatorNodeFile import OperatorNode
+from SquareRootNodeFile import SquareRootNode
+from UnaryOperatorNodeFile import UnaryOperatorNode
+
 from typing import List
 
 def demo():
