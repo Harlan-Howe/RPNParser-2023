@@ -3,32 +3,65 @@ import numpy as np
 from NodeFile import Node
 from AddNodeFile import AddNode
 from NumberNodeFile import NumberNode
-from OperatorNodeFile import OperatorNode
 from SquareRootNodeFile import SquareRootNode
-from UnaryOperatorNodeFile import UnaryOperatorNode
 
 from typing import List
 
+
 def demo():
+    print("--------------------  RPN 1")  # test creating a NumberNode
+    RPN_string1 = "12"
+    root1: Node = parse_string(RPN_string1)
+    print(root1)
+    print(f"{root1.get_value() = }")
 
-    RPN_string = "56 12 34 16 √ + + +"
-    root = parse_string(RPN_string)
-    print(root.get_value())
+    print("--------------------  RPN 2")  # test creating a (Binary) OperatorNode
+    RPN_string2 = "13 27 +"
+    root2: Node = parse_string(RPN_string2)
+    print(root2)
+    print(f"{root2.get_infix_string() = }")
+    print(f"{root2.get_value() = }")
 
-    buffer = np.zeros((600, 900, 3), dtype=float)
-    root.draw_self_at(buffer,x=450, y = 20, horizontal_spacing=450)
+    print("--------------------  RPN 3")  # test creating an UnaryOperatorNode
+    RPN_string3 = "169 √"  # (that symbol is an option-v, or you can just copy/paste it.)
+    root3: Node = parse_string(RPN_string3)
+    print(root3)
+    print(f"{root3.get_infix_string() = }")
+    print(f"{root3.get_value() = }")
 
-    cv2.imshow("result", buffer)
-    cv2.waitKey()
-    cv2.destroyAllWindows()
+    print("--------------------  RPN 4")  # test creating a compound statement
+    RPN_string4 = "100 21 + √"  # (that symbol is an option-v, or you can just copy/paste it.)
+    root4: Node = parse_string(RPN_string4)
+    print(root4)
+    print(f"{root4.get_infix_string() = }")
+    print(f"{root4.get_value() = }")
 
-def parse_string(s: str) -> NodeFile.Node:
+    # showing graphics
+    buffer1 = np.zeros((600, 900, 3), dtype=float)  # make a new black image
+    root4.draw_self_at(buffer1, x=450, y=20, horizontal_spacing=450)  # draw the tree in the image.
+    cv2.imshow("result 4", buffer1)  # display the image in a window.
+    cv2.waitKey()  # pause for the user to press any key.
+
+    print("--------------------  RPN 5")
+    RPN_string5 = "56 12 34 16 √ + + +"
+    root5 = parse_string(RPN_string5)
+    print(root5.get_value())
+
+    buffer2 = np.zeros((600, 900, 3), dtype=float)  # make another new black image.
+    root5.draw_self_at(buffer2, x=450, y=20, horizontal_spacing=450)  # draw this tree in the image.
+
+    cv2.imshow("result 5", buffer2)  # display this image in a different window.
+    cv2.moveWindow("result 5", 100, 100)  # offset this image from the other one.
+    cv2.waitKey()  # wait for the user to press a button
+    cv2.destroyAllWindows()  # close the windows.
+
+def parse_string(s: str) -> Node:
     """
     generates an RPN tree from the given string
     :param s:  a string of numbers and operators, separated by spaces that should represent a calculation.
     :return: a Node for the root of the RPN tree we generate from the string.
     """
-    stack: List[NodeFile.Node] = []
+    stack: List[Node] = []
     parts = s.split(" ")
     for p in parts:
         try:
@@ -45,7 +78,7 @@ def parse_string(s: str) -> NodeFile.Node:
             pass
 
     # TODO #1C: return the top (hopefully only) Node on the stack.
-    return None
+    return None  # replace this!!!!
 
 
 if __name__ == '__main__':
