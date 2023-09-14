@@ -55,6 +55,7 @@ def demo():
     cv2.waitKey()  # wait for the user to press a button
     cv2.destroyAllWindows()  # close the windows.
 
+
 def parse_string(s: str) -> Node:
     """
     generates an RPN tree from the given string
@@ -65,16 +66,16 @@ def parse_string(s: str) -> Node:
     parts = s.split(" ")
     for p in parts:
         try:
-            num = float(p)
+            num = float(p)  # attempt to interpret this string as a float.
             # TODO #1A: if we got here, that means that p was a number. Create a number node from "num" and append it to
             #           the stack.
             pass
 
-        except:
-            #TODO #1B: if we got here, that means that p wasn't a number. It should be an operator. Determine which
+        except ValueError:  # exception for parsing a string with non-numeric content
+            # TODO #1B: if we got here, that means that p wasn't a number. It should be an operator. Determine which
             #          operator it was, pop one or two values from the stack, generate a new node, and append it to
             #          the stack.
-            # Note: to perform the pop, I receommend "stack.pop(-1)" to get the last item in the list.
+            # Note: to perform the pop, I recommend "stack.pop(-1)" to get the last item in the list.
             pass
 
     # TODO #1C: return the top (hopefully only) Node on the stack.
@@ -83,4 +84,3 @@ def parse_string(s: str) -> Node:
 
 if __name__ == '__main__':
     demo()
-
