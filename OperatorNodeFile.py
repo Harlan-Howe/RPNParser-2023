@@ -7,7 +7,7 @@ from NodeFile import Node, display_font
 
 class OperatorNode(Node):
     """
-    an abstract class that respresents a binary operator.
+    an abstract class that represents a binary operator.
     """
     def __init__(self, content: str = "?", left: Node = None, right: Node = None):
         super(OperatorNode,self).__init__(content=content, left=left, right=right)
