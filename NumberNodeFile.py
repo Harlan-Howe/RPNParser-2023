@@ -14,11 +14,11 @@ class NumberNode(Node):
 
     def get_value(self) -> float:
         # TODO 2A: override this method.
-        return -1 # replace this line.
+        return -1  # replace this line.
 
     def get_infix_string(self) -> str:
         # TODO 3A: override this method.
-        return "Not yet written." # replace this line.
+        return "Not yet written."  # replace this line.
 
     def draw_my_label(self, buffer, x, y) -> Tuple[Tuple[int, int], Tuple[int, int]]:
         descriptionString = f"{self.content}"
