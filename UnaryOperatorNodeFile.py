@@ -13,7 +13,7 @@ class UnaryOperatorNode(OperatorNode):
         super(UnaryOperatorNode, self).__init__(content=content, left=left, right=right)
 
     def get_infix_string(self) -> str:
-        # TODO 3B: override this method.
+        # TODO 3C: override this method.
         return "Not yet written."
 
     def draw_self_at(self, buffer, x: int, y: int, horizontal_spacing: int, vertical_spacing: int = 45):

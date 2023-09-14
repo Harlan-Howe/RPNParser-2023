@@ -10,19 +10,23 @@ from typing import List
 
 def demo():
     print("--------------------  RPN 1")  # test creating a NumberNode
+    # This requires to-do # 1A, #1C, #2A, and #3A
     RPN_string1 = "12"
     root1: Node = parse_string(RPN_string1)
     print(root1)
     print(f"{root1.get_value() = }")
+    print(f"{root1.get_infix_string()}")
 
     print("--------------------  RPN 2")  # test creating a (Binary) OperatorNode
+    # This requires additional to-dos #1B, #2B and #3B
     RPN_string2 = "13 27 +"
     root2: Node = parse_string(RPN_string2)
     print(root2)
-    print(f"{root2.get_infix_string() = }")
     print(f"{root2.get_value() = }")
+    print(f"{root2.get_infix_string() = }")
 
     print("--------------------  RPN 3")  # test creating an UnaryOperatorNode
+    # This requires additional to-dos #2C and #3C
     RPN_string3 = "169 √"  # (that symbol is an option-v, or you can just copy/paste it.)
     root3: Node = parse_string(RPN_string3)
     print(root3)
@@ -53,6 +57,9 @@ def demo():
     cv2.imshow("result 5", buffer2)  # display this image in a different window.
     cv2.moveWindow("result 5", 100, 100)  # offset this image from the other one.
     cv2.waitKey()  # wait for the user to press a button
+
+    #  Write code to test out your other operators...
+
     cv2.destroyAllWindows()  # close the windows.
 
 
