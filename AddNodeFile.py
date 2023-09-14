@@ -11,4 +11,4 @@ class AddNode(OperatorNode):
 
     def get_value(self) -> float:
         # TODO 2B: override this method!
-        return -1 # replace this line.
+        return -1  # replace this line.
